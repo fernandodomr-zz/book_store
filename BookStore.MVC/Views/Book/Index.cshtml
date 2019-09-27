@@ -1,0 +1,88 @@
+﻿@model IEnumerable<BookStore.MVC.ViewModels.BookViewModel>
+
+@{
+    ViewBag.Title = "Titles";
+}
+
+<h2>Titles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary mb-2" })
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)@*, new { data_bind = "click: sortByBookTitle" })*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-secondary btn-sm m-1 col-3" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-secondary btn-sm m-1 col-3" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm m-1 col-3" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts
+{
+    @*<script type='text/javascript' src='~/Scripts/knockout-3.5.0.js'></script>
+    <script>
+        $(function () {
+            function viewModel() {
+
+                var self = this;
+
+                self.books = ko.observableArray([]).extend({ deferred: true });
+
+                self.orderByTitle = ko.observable("asc");
+
+                self.sortByBookTitle = function () {
+                    if (self.orderByTitle() == 'asc') {
+                        self.orderByTitle('desc');
+                        self.books.sort(function (left, right) { return left.Title == right.Title ? 0 : (left.Title < right.Title ? -1 : 1) });
+                    }
+                    else {
+                        self.orderByTitle('asc');
+                        self.books.sort(function (left, right) { return left.Title == right.Title ? 0 : (left.Title < right.Title ? 1 : -1) });
+                    }
+                }
+
+                //ko.computed(function () {
+                //    $.getJSON('/Book/getBooks')
+                //        .done(function (data) {
+                //            self.books(data);
+                //        });
+                //}, this).extend({ deferred: true });
+
+                self.books(@Model);
+            }
+
+            ko.applyBindings(new viewModel());
+        });
+
+    </script>*@
+}
